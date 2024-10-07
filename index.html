@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechWave Solutions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .logo {
+            width: 150px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .form-signin {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+        }
+
+        .nav-item {
+            margin-right: 15px;
+        }
+
+        .nav-link {
+            color: #007bff;
+        }
+
+        .content {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="login-page" class="container">
+            <h1 class="text-center"><img src="logo.png" alt="TechWave Logo" class="logo"></h1>
+            <form id="login-form" class="form-signin">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+
+        <div id="admin-dashboard" class="container d-none">
+            <h1>Admin Dashboard</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="#">User Management</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Task Management</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="logout">Log Out</a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                <h3>Manage Users</h3>
+                <!-- User management content goes here -->
+            </div>
+        </div>
+
+        <div id="employee-dashboard" class="container d-none">
+            <h1>Employee Dashboard</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="#">My Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="logout">Log Out</a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                <h3>Your Tasks</h3>
+                <!-- Task management content goes here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simulated login logic (replace with actual authentication logic)
+            if (username === 'admin' && password === 'admin') {
+                showDashboard('admin');
+            } else if (username === 'employee' && password === 'employee') {
+                showDashboard('employee');
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+            showLogin();
+        });
+
+        function showLogin() {
+            document.getElementById('login-page').classList.remove('d-none');
+            document.getElementById('admin-dashboard').classList.add('d-none');
+            document.getElementById('employee-dashboard').classList.add('d-none');
+        }
+
+        function showDashboard(role) {
+            document.getElementById('login-page').classList.add('d-none');
+            document.getElementById('admin-dashboard').classList.toggle('d-none', role !== 'admin');
+            document.getElementById('employee-dashboard').classList.toggle('d-none', role !== 'employee');
+        }
+    </script>
+</body>
+</html>
